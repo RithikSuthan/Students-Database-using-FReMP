@@ -30,9 +30,9 @@ def get_all_students():
     return jsonify(students)
 
 
-@app.route('/students/<name>', methods=['GET'])
-def get_student_details(name):
-    student = mongo.db.students.find_one({'name': name})
+@app.route('/students/<rno>', methods=['GET'])
+def get_student_details(rno):
+    student = mongo.db.students.find_one({'rno': rno})
     if student:
         # Convert ObjectId to string before returning the JSON response
         student['_id'] = str(student['_id'])
@@ -41,9 +41,9 @@ def get_student_details(name):
         return jsonify({'message': 'Student not found'})
 
 
-@app.route('/update_student/<name>', methods=['PUT'])
-def update_student(name):
-    student = mongo.db.students.find_one({'name': name})
+@app.route('/update_student/<rno>', methods=['PUT'])
+def update_student(rno):
+    student = mongo.db.students.find_one({'rno': rno})
     if student:
         student_id = student['_id']
         new_data = request.json
@@ -54,13 +54,13 @@ def update_student(name):
         return jsonify({'message': 'Student not found'})
 
 
-@app.route('/delete/<name>', methods=['DELETE'])
-def delete_student(name):
-    result = mongo.db.students.delete_one({'name': name})
+@app.route('/delete/<rno>', methods=['DELETE'])
+def delete_student(rno):
+    result = mongo.db.students.delete_one({'rno': rno})
     if result.deleted_count == 1:
         return jsonify({'message': 'Student record deleted successfully'})
     else:
-        return jsonify({'message': 'No student record found with the given name'}), 404
+        return jsonify({'message': 'No student record found with the given roll number'}), 404
 
 
 if __name__ == '__main__':

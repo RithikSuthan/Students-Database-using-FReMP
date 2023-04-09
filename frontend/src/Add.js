@@ -23,12 +23,17 @@ class Add extends React.Component {
           <form onSubmit={(event) => {
             event.preventDefault();
             const student = {
+              rno:this.refs.rno.value,
               name: this.refs.name.value,
               email: this.refs.email.value,
               phone: this.refs.phone.value
             };
             this.addStudent(student);
           }}>
+            <div className="form-group">
+              <label>Roll No:</label>
+              <input type="text" className="form-control" ref="rno" />
+            </div>
             <div className="form-group">
               <label>Name:</label>
               <input type="text" className="form-control" ref="name" />

@@ -5,6 +5,7 @@ class Update extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+          rno:'',
           name: '',
           email: '',
           phone: '',
@@ -18,9 +19,9 @@ class Update extends React.Component {
     
       handleSubmit = (event) => {
         event.preventDefault();
-        const { name, email, phone } = this.state;
-        const student = { email, phone };
-        fetch(`http://localhost:5000/update_student/${name}`, {
+        const { rno,name, email, phone } = this.state;
+        const student = { name,email, phone };
+        fetch(`http://localhost:5000/update_student/${rno}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -37,11 +38,21 @@ class Update extends React.Component {
       };
     
       render() {
-        const { name, email, phone } = this.state;
+        const { rno,name, email, phone } = this.state;
         return (
           <div className="container">
             <h1>Update Student</h1>
             <Form onSubmit={this.handleSubmit}>
+            <FormGroup>
+                <Label for="rno">Roll Number</Label>
+                <Input
+                  type="text"
+                  name="rno"
+                  id="rno"
+                  value={rno}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
               <FormGroup>
                 <Label for="name">Name</Label>
                 <Input

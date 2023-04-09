@@ -29,6 +29,7 @@ class View extends React.Component {
               <table className="table table-striped table-bordered">
                 <thead className="thead-dark">
                   <tr>
+                    <th>Roll No</th>
                     <th>Student ID</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -37,6 +38,7 @@ class View extends React.Component {
                 <tbody>
                   {this.state.students.map((student) => (
                     <tr key={student.id}>
+                      <td>{student.rno}</td>
                       <td>{student.name}</td>
                       <td>{student.email}</td>
                       <td>{student.phone}</td>
