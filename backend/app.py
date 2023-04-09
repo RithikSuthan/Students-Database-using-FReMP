@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from flask_cors import CORS
 import json
-
+from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 CORS(app)
 
@@ -61,6 +61,26 @@ def delete_student(rno):
         return jsonify({'message': 'Student record deleted successfully'})
     else:
         return jsonify({'message': 'No student record found with the given roll number'}), 404
+
+
+@app.route('/register_user', methods=['POST'])
+def register():
+    user_data = request.get_json()
+    if mongo.db.users.find_one({'username': user_data.get('username')}):
+        return jsonify({'success': False, 'message': 'Username already taken'})
+    user_data['password'] = generate_password_hash(user_data.get('password'))
+    mongo.db.users.insert_one(user_data)
+    return jsonify({'success': True, 'message': 'Registration successful'})
+
+
+@app.route('/login_user', methods=['POST'])
+def login():
+    user_data = request.get_json()
+    user = mongo.db.users.find_one({'username': user_data.get('username')})
+    if user and check_password_hash(user.get('password'), user_data.get('password')):
+        return jsonify({'success': True, 'message': 'Login successful'})
+    else:
+        return jsonify({'success': False, 'message': 'Invalid username or password'})
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 
-const Navbar = () => {
+const FrontNavBar = () => {
   return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
@@ -24,34 +24,14 @@ const Navbar = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
-                {/* <li className="nav-item">
-                  <Link to="/" className="nav-link">
-                    Home
-                  </Link>
-                </li> */}
                 <li className="nav-item">
-                  <Link to="/login/add" className="nav-link">
-                    Add
+                  <Link to="/login" className="nav-link">
+                    Login
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/login/view" className="nav-link">
-                    View
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/login/view_individual" className="nav-link">
-                    View Individual
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/login/update" className="nav-link">
-                    Update
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/login/delete" className="nav-link">
-                    Delete
+                  <Link to="/register" className="nav-link">
+                    Register
                   </Link>
                 </li>
               </ul>
@@ -61,4 +41,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default FrontNavBar;
